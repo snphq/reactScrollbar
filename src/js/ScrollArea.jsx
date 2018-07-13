@@ -95,9 +95,11 @@ export default class ScrollArea extends React.Component {
 
         let scrollbarY = this.canScrollY() ? (
             <ScrollBar
+                onRef={ref => this.scrollbarY = ref}
                 ownerDocument={ownerDocument}
                 realSize={this.state.realHeight}
                 containerSize={this.state.containerHeight}
+                scrollbarSize={this.state.scrollbarYHeight || 0}
                 position={this.state.topPosition}
                 onMove={this.handleScrollbarMove.bind(this)}
                 onPositionChange={this.handleScrollbarYPositionChange.bind(this)}
@@ -111,9 +113,11 @@ export default class ScrollArea extends React.Component {
 
         let scrollbarX = this.canScrollX() ? (
             <ScrollBar
+                onRef={ref => this.scrollbarX = ref}
                 ownerDocument={ownerDocument}
                 realSize={this.state.realWidth}
                 containerSize={this.state.containerWidth}
+                scrollbarSize={this.state.scrollbarXWidth || 0}
                 position={this.state.leftPosition}
                 onMove={this.handleScrollbarMove.bind(this)}
                 onPositionChange={this.handleScrollbarXPositionChange.bind(this)}
@@ -379,7 +383,9 @@ export default class ScrollArea extends React.Component {
             realHeight: realHeight,
             containerHeight: containerHeight,
             realWidth: realWidth,
-            containerWidth: containerWidth
+            containerWidth: containerWidth,
+            scrollbarXWidth: this.scrollbarX && this.scrollbarX.offsetWidth,
+            scrollbarYHeight: this.scrollbarY && this.scrollbarY.offsetHeight,
         };
     }
 

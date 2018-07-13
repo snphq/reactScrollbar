@@ -28,6 +28,7 @@ class ScrollBar extends React.Component {
             this.props.ownerDocument.addEventListener("mousemove", this.bindedHandleMouseMove);
             this.props.ownerDocument.addEventListener("mouseup", this.bindedHandleMouseUp);
         }
+        this.props.onRef(this.scrollbarContainer);
     }
 
     componentWillReceiveProps(nextProps){
@@ -52,7 +53,7 @@ class ScrollBar extends React.Component {
         let proportionalToPageScrollSize = props.containerSize * props.containerSize / props.realSize;
         let scrollSize = proportionalToPageScrollSize < props.minScrollSize ? props.minScrollSize : proportionalToPageScrollSize;
 
-        let scrollPosition = (props.containerSize - scrollSize) * fractionalPosition;
+        let scrollPosition = (props.scrollbarSize - scrollSize) * fractionalPosition;
         return {
             scrollSize: scrollSize,
             position: Math.round(scrollPosition)
